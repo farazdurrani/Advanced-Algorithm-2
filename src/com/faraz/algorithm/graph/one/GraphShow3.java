@@ -9,9 +9,9 @@ public class GraphShow3 {
         Node d = new Node("3");
         Node e = new Node("4");
 
-        graph.addNodes(a,d);
-        graph.addNodes(a,b);
-        graph.addNodes(c,e);
+        graph.addEdges(a,d);
+        graph.addEdges(a,b);
+        graph.addEdges(c,e);
 
         graph.breadthFirstTraversal(a);
     }

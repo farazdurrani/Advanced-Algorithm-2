@@ -12,13 +12,13 @@ public class GraphShow {
 	Node d = new Node("D");
 	Node e = new Node("E");
 
-	graph.addNodes(a, b);
-	graph.addNodes(b, c);
-	graph.addNodes(b, d);
-	graph.addNodes(c, e);
-	graph.addNodes(b, a);
+	graph.addEdges(a, b);
+	graph.addEdges(b, c);
+	graph.addEdges(b, d);
+	graph.addEdges(c, e);
+	graph.addEdges(b, a);
 
-	graph.printNodes();
+	graph.printEdges();
 
 	System.out.println(graph.hasEdge(a, b));
 	System.out.println(graph.hasEdge(d, a));

@@ -6,40 +6,39 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
-import java.util.function.Consumer;
 
 public class Graph {
 
-    private Map<Node, ArrayList<Node>> linkedNodes;
+    private Map<Node, ArrayList<Node>> linkedEdges;
     private boolean directed;
 
     public Graph(boolean directed) {
 	this.directed = directed;
-	linkedNodes = new LinkedHashMap<>();
+	linkedEdges = new LinkedHashMap<>();
     }
 
-    public void addNodes(Node source, Node destination) {
-	addNodesHelper(source, destination);
+    public void addEdges(Node source, Node destination) {
+	addEdgesHelper(source, destination);
 	if (!directed) {
-	    addNodesHelper(destination, source);
+	    addEdgesHelper(destination, source);
 	}
     }
 
-    private void addNodesHelper(Node source, Node destination) {
-	if (linkedNodes.containsKey(source)) {
-	    ArrayList<Node> nodes = linkedNodes.get(source);
+    private void addEdgesHelper(Node source, Node destination) {
+	if (linkedEdges.containsKey(source)) {
+	    ArrayList<Node> nodes = linkedEdges.get(source);
 	    nodes.add(destination);
-	    linkedNodes.put(source, nodes);
+	    linkedEdges.put(source, nodes);
 	} else {
 	    ArrayList<Node> nodes = new ArrayList<>();
 	    nodes.add(destination);
-	    linkedNodes.put(source, nodes);
+	    linkedEdges.put(source, nodes);
 	}
     }
 
-    public void printNodes() {
+    public void printEdges() {
 	System.out.println("Nodes has the following edges:");
-	this.linkedNodes.forEach((node, nodes) -> {
+	this.linkedEdges.forEach((node, nodes) -> {
 	    System.out.print(node.label + " -> ");
 	    nodes.forEach(n -> System.out.print(n.label + " "));
 	    System.out.println();
@@ -47,13 +46,13 @@ public class Graph {
     }
 
     public boolean hasEdge(Node a, Node b) {
-	return linkedNodes.containsKey(a) && linkedNodes.get(a).contains(b);
+	return linkedEdges.containsKey(a) && linkedEdges.get(a).contains(b);
     }
 
     public void depthFirstTraversal(Node a) {
 	depthFirstTraversalHelper(a);
 	System.out.println();
-	linkedNodes.keySet().forEach(node -> {
+	linkedEdges.keySet().forEach(node -> {
 	    if (!node.isVisited()) {
 		depthFirstTraversalHelper(node);
 	    }
@@ -64,7 +63,7 @@ public class Graph {
     private void depthFirstTraversalHelper(Node a) {
 	a.setVisited(true);
 	System.out.print(a.label + " ");
-	List<Node> neighbors = linkedNodes.get(a);
+	List<Node> neighbors = linkedEdges.get(a);
 	if (neighbors == null) {
 	    return;
 	}
@@ -78,7 +77,7 @@ public class Graph {
 
     public void breadthFirstTraversal(Node node) {
 	breadthFirstTraversalHelper(node);
-	linkedNodes.keySet().forEach(n -> {
+	linkedEdges.keySet().forEach(n -> {
 	    if (!n.isVisited()) {
 		breadthFirstTraversalHelper(n);
 	    }
@@ -97,7 +96,7 @@ public class Graph {
 	    }
 	    n.setVisited(true);
 	    System.out.print(n.label + " ");
-	    List<Node> neighbors = linkedNodes.get(node);
+	    List<Node> neighbors = linkedEdges.get(node);
 	    if (null == neighbors) {
 		continue;
 	    }

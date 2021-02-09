@@ -1,6 +1,6 @@
-package com.faraz.algorithm.graph.one;
+package com.faraz.algorithm.graph.two;
 
-public class GraphShow2 {
+public class GraphDriver {
     public static void main(String[] args) {
 	Graph graph = new Graph(true);
 	Node zero = new Node("0");
@@ -27,5 +27,18 @@ public class GraphShow2 {
 	graph.addEdges(seven, eight);
 
 	graph.depthFirstTraversal(seven);
+	
+	graph = new Graph(false);
+	
+        Node a = new Node("0");
+        Node b = new Node("1");
+        Node c = new Node("2");
+        Node d = new Node("3");
+        Node e = new Node("4");
+
+        graph.addEdges(a,d);
+        graph.addEdges(a,b);
+        graph.addEdges(c,e);
+	graph.breadthFirstTraversal(a);
     }
 }
